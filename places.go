@@ -7,7 +7,6 @@ type Place struct {
 	gorm.Model
 	Name       string `gorm:"size:4096"`
 	SearchName string `gorm:"size:1024"`
-	MealID     uint
 }
 
 // PlaceVisit represents an visit to a place

@@ -11,5 +11,4 @@ type Food struct {
 	Name    string `gorm:"size:2048"`
 	Carbs   int
 	Insulin float64
-	MealID  uint
 }

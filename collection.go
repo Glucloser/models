@@ -29,8 +29,8 @@ func DB() *gorm.DB {
 		panic(err)
 	}
 	log.Printf("migrating")
-	err = dbConn.AutoMigrate(&Meal{}, &Message{}, &Place{},
-		&PlaceVisit{}, &User{}, &Sugar{}, &Food{}).Error
+	err = dbConn.AutoMigrate(&Message{}, &Place{},
+		&PlaceVisit{}, &User{}, &Sugar{}, &Food{}, &AuditItem{}).Error
 	if err != nil {
 		panic(err)
 	}
