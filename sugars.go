@@ -14,7 +14,7 @@ const (
 // Sugar represents a measured blood sugar
 type Sugar struct {
 	gorm.Model
-	Occurred `gorm:"unique"`
-	Value    int
-	Source   SugarSource `gorm:"size:64"`
+	Occurred
+	Value  int
+	Source SugarSource `gorm:"size:64"`
 }
