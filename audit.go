@@ -42,6 +42,7 @@ type AuditItem struct {
 	RawType                              string `gorm:"size:512"`
 	RawValues                            string `gorm:"size:5096"`
 	RawDeviceType                        string `gorm:"size:1024"`
+	RawSequenceNumber                    int    `gorm:"unique_index"`
 }
 
 func (item *AuditItem) SetRaw(key, value string) {
@@ -208,5 +209,11 @@ func (item *AuditItem) SetRaw(key, value string) {
 		item.RawValues = value
 	case "Raw-Device Type":
 		item.RawDeviceType = value
+	case "Raw-Seq Num":
+		num, err := strconv.Atoi(value)
+		if err != nil {
+			return
+		}
+		item.RawSequenceNumber = num
 	}
 }

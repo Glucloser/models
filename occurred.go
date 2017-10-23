@@ -6,5 +6,5 @@ import (
 
 // Occured represents the time when an event happend.
 type Occurred struct {
-	OccurredAt time.Time `gorm:"unique_index"`
+	OccurredAt time.Time
 }

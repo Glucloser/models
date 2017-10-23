@@ -30,7 +30,7 @@ func DB() *gorm.DB {
 	}
 	log.Printf("migrating")
 	err = dbConn.AutoMigrate(&Message{}, &Place{},
-		&PlaceVisit{}, &User{}, &Sugar{}, &Food{}, &AuditItem{}).Error
+		&PlaceVisit{}, &User{}, &Sugar{}, &Food{}, &AuditItem{}, &FoodStem{}).Error
 	if err != nil {
 		panic(err)
 	}
