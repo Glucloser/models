@@ -2,6 +2,7 @@ package models
 
 import (
 	"github.com/jinzhu/gorm"
+	"log"
 	"math"
 	"strconv"
 	"time"
@@ -42,17 +43,19 @@ type AuditItem struct {
 	RawType                              string `gorm:"size:512"`
 	RawValues                            string `gorm:"size:5096"`
 	RawDeviceType                        string `gorm:"size:1024"`
-	RawSequenceNumber                    int    `gorm:"unique_index"`
+	RawSequenceNumber                    int
+	RawID                                int64 `gorm:"unique_index"`
 }
 
 func (item *AuditItem) SetRaw(key, value string) {
 	switch key {
 	case "Timestamp":
-		parsedTime, err := time.Parse("1/02/06 15:04:05", value)
+		parsedTime, err := time.Parse("1/2/06 15:04:05", value)
 		if err != nil {
+			log.Printf("Timestamp error %v", err)
 			return
 		}
-		item.OccurredAt = parsedTime
+		item.Occurred.OccurredAt = parsedTime
 	case "New Device Time":
 		parsedTime, err := time.Parse("1/02/06 15:04:05", value)
 		if err != nil {
@@ -215,5 +218,12 @@ func (item *AuditItem) SetRaw(key, value string) {
 			return
 		}
 		item.RawSequenceNumber = num
+	case "Raw-ID":
+		num, err := strconv.ParseInt(value, 10, 64)
+		if err != nil {
+			log.Printf("Raw-ID error %v", err)
+			return
+		}
+		item.RawID = num
 	}
 }
